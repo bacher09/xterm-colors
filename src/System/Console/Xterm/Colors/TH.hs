@@ -3,6 +3,7 @@ module System.Console.Xterm.Colors.TH
     ( ansiColors
     , greyScales
     , extraColors
+    , xtermColors
     ) where
 
 
@@ -13,7 +14,7 @@ import Control.Applicative
 import System.Console.Xterm.Types
 
 
-ansiColors, greyScales, extraColors :: [RGB]
+ansiColors, greyScales, extraColors, xtermColors :: [RGB]
 
 -- | base ansi colors in xterm: 0-15
 ansiColors = [ mkRGB 0x00 0x00 0x00
@@ -46,3 +47,6 @@ greyScales = (\v -> mkRGB v v v) . fromIntegral <$> vals
   where
     vals :: [Int]
     vals = unfoldr (\r -> if r <= 0xee then Just (r, r + 10) else Nothing) 0x08
+
+
+xtermColors = ansiColors ++ extraColors ++ greyScales
