@@ -2,7 +2,15 @@
 {-# LANGUAGE TemplateHaskell, MultiParamTypeClasses, TypeFamilies #-}
 module System.Console.Xterm.Types
     ( RGB(..)
+    , XYZ(..)
+    , LAB(..)
+    , WhiteRef(..)
+    , CIEProfile(..)
     , mkRGB
+    , sRGBd50
+    , sRGBd65
+    , d65
+    , d50
     ) where
 
 
@@ -14,6 +22,20 @@ import qualified Data.Vector.Unboxed as VU
 
 newtype RGB = RGB (Word8, Word8, Word8)
     deriving(Show, Eq, Ord)
+
+
+newtype XYZ = XYZ (Double, Double, Double)
+    deriving(Show, Eq, Ord)
+
+newtype LAB = LAB (Double, Double, Double)
+    deriving(Show, Eq, Ord)
+
+newtype WhiteRef = WhiteRef (Double, Double, Double)
+
+
+data CIEProfile = CIEProfile (Double, Double, Double)
+                             (Double, Double, Double)
+                             (Double, Double, Double)
 
 
 instance Lift Word8 where
@@ -36,3 +58,23 @@ derivingUnbox "RGB"
 
 mkRGB :: Word8 -> Word8 -> Word8 -> RGB
 mkRGB r g b = RGB $ (r, g, b)
+
+
+sRGBd65 :: CIEProfile
+sRGBd65 = CIEProfile (0.4124564, 0.3575761, 0.1804375)
+                     (0.2126729, 0.7151522, 0.0721750)
+                     (0.0193339, 0.1191920, 0.9503041)
+
+
+sRGBd50 :: CIEProfile
+sRGBd50 = CIEProfile (0.4360747, 0.3850649, 0.1430804)
+                     (0.2225045, 0.7168786, 0.0606169)
+                     (0.0139322, 0.0971045, 0.7141733)
+
+
+d65 :: WhiteRef
+d65 = WhiteRef (0.95047, 1.0000001, 1.08883)
+
+
+d50 :: WhiteRef
+d50 = WhiteRef (0.96422, 1.0, 0.82521)
