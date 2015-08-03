@@ -24,6 +24,7 @@ library
 
   other-modules:       System.Console.Xterm.Types
   build-depends:       base >=4.5 && <5,
+                       template-haskell >= 2.5,
                        vector >=0.10,
                        vector-th-unbox
   hs-source-dirs:      src

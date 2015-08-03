@@ -6,11 +6,20 @@ module System.Console.Xterm.Types
 
 
 import Data.Word
+import Language.Haskell.TH.Syntax
 import Data.Vector.Unboxed.Deriving
 
 
 newtype RGB = RGB (Word8, Word8, Word8)
     deriving(Show, Eq, Ord)
+
+
+instance Lift Word8 where
+    lift x = [| fromInteger $(lift $ toInteger x) :: Word8 |]
+
+
+instance Lift RGB where
+    lift (RGB (r, g, b)) = [| RGB (r, g, b) |]
 
 
 derivingUnbox "RGB"
