@@ -8,6 +8,7 @@ module System.Console.Xterm.Types
 import Data.Word
 import Language.Haskell.TH.Syntax
 import Data.Vector.Unboxed.Deriving
+import qualified Data.Vector.Unboxed as VU
 
 
 newtype RGB = RGB (Word8, Word8, Word8)
@@ -16,6 +17,10 @@ newtype RGB = RGB (Word8, Word8, Word8)
 
 instance Lift Word8 where
     lift x = [| fromInteger $(lift $ toInteger x) :: Word8 |]
+
+
+instance (VU.Unbox a, Lift a) => Lift (VU.Vector a) where
+  lift v = [| VU.fromList $(lift $ VU.toList v) |]
 
 
 instance Lift RGB where

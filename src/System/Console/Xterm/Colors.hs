@@ -11,5 +11,6 @@ import System.Console.Xterm.Types
 import qualified System.Console.Xterm.Colors.TH as TH
 
 
-xtermColors :: [RGB]
-xtermColors = $(let x = TH.xtermColors in [| x |])
+-- | Unboxed Vectore that holds info about xterm colors
+xtermColors :: VU.Vector RGB
+xtermColors = $(let val = VU.fromList TH.xtermColors in [| val |])
