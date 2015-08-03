@@ -6,6 +6,8 @@ module System.Console.Xterm.Types
     , LAB(..)
     , WhiteRef(..)
     , CIEProfile(..)
+    , FloatLAB
+    , LABDistance
     , mkRGB
     , sRGBd50
     , sRGBd65
@@ -15,9 +17,15 @@ module System.Console.Xterm.Types
 
 
 import Data.Word
+import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 import Data.Vector.Unboxed.Deriving
 import qualified Data.Vector.Unboxed as VU
+
+
+-- using float to reduce memory usage
+type FloatLAB = (Float, Float, Float)
+type LABDistance = Float
 
 
 newtype RGB = RGB (Word8, Word8, Word8)
@@ -40,6 +48,10 @@ data CIEProfile = CIEProfile (Double, Double, Double)
 
 instance Lift Word8 where
     lift x = [| fromInteger $(lift $ toInteger x) :: Word8 |]
+
+
+instance Lift Float where
+  lift x = [| $(litE $ rationalL $ toRational x) :: Float |]
 
 
 instance (VU.Unbox a, Lift a) => Lift (VU.Vector a) where
