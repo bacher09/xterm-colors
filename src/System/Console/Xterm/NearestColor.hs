@@ -1,5 +1,5 @@
 module System.Console.Xterm.NearestColor
-    ( simpleNearestXtermColor
+    ( simpleNearestColor
     ) where
 
 
@@ -10,11 +10,16 @@ import System.Console.Xterm.Types
 import System.Console.Xterm.Colors
 
 
+-- using float to reduce memory usage
+type FloatLAB = (Float, Float, Float)
+type LABDistance = Float
+
+
 -- | search nearest xterm color for 24-bit RGB color using
 -- simple Euclidean distance
 -- Complexity: O(n)
-simpleNearestXtermColor :: RGB -> Word8
-simpleNearestXtermColor color = fromIntegral nearestIndex
+simpleNearestColor :: RGB -> Word8
+simpleNearestColor color = fromIntegral nearestIndex
   where
     nearestIndex = VU.minIndexBy (compare `on` rgbdist color) xtermColors
     -- dist without sqrt for performance
