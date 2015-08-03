@@ -35,7 +35,7 @@ library
   ghc-options:         -O2 -funbox-strict-fields -Wall -fno-warn-name-shadowing
 
 
-benchmark bench-hostandport
+benchmark xterm-colors
   type:                exitcode-stdio-1.0
   hs-source-dirs:      benchmarks
   main-is:             Benchmark.hs
