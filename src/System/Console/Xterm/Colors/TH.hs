@@ -7,7 +7,7 @@ module System.Console.Xterm.Colors.TH
     ) where
 
 
-import Data.List (unfoldr, minimumBy)
+import Data.List (unfoldr)
 import Control.Applicative
 
 

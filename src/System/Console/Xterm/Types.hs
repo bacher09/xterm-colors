@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# LANGUAGE TemplateHaskell, MultiParamTypeClasses, TypeFamilies #-}
 module System.Console.Xterm.Types
     ( RGB(..)
