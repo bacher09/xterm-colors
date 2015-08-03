@@ -19,7 +19,8 @@ library
   -- exposed-modules:     
   -- other-modules:       
   -- other-extensions:    
-  exposed-modules:     System.Console.Xterm.Colors
+  exposed-modules:     System.Console.Xterm.Colors,
+                       System.Console.Xterm.NearestColor
 
   other-modules:       System.Console.Xterm.Types,
                        System.Console.Xterm.Colors.TH

@@ -1,6 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module System.Console.Xterm.Colors
     ( RGB(..)
+    , mkRGB
     , xtermColors
     , getXtermColor
     ) where
