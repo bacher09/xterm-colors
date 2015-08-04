@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# OPTIONS_GHC -fno-warn-orphans -fno-warn-unused-imports #-}
 {-# LANGUAGE TemplateHaskell, MultiParamTypeClasses, TypeFamilies #-}
 module System.Console.Xterm.Types
     ( RGB(..)
@@ -21,6 +21,10 @@ import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 import Data.Vector.Unboxed.Deriving
 import qualified Data.Vector.Unboxed as VU
+-- work around for vector-th-unbox
+-- http://stackoverflow.com/a/13438039
+import qualified Data.Vector.Generic
+import qualified Data.Vector.Generic.Mutable
 
 
 -- using float to reduce memory usage
